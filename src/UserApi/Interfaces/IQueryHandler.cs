@@ -1,5 +1,5 @@
 ﻿#pragma warning disable CS1591
-namespace UserApi.Queries.Interfaces;
+namespace UserApi.Interfaces;
 
 /// <summary>
 /// Used to mark query handler (process query)

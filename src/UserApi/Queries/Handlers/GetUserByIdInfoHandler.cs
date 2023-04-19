@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using UserApi.Data;
 using UserApi.Models;
-using UserApi.Queries.Interfaces;
+using UserApi.Interfaces;
 #pragma warning disable CS1591
 
 namespace UserApi.Queries.Handlers;

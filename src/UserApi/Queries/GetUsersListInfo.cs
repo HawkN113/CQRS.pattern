@@ -1,4 +1,4 @@
-﻿using UserApi.Queries.Interfaces;
+﻿using UserApi.Interfaces;
 
 namespace UserApi.Queries;
 

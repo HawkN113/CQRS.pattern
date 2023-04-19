@@ -3,7 +3,7 @@ using UserApi.Data;
 using UserApi.Models;
 using UserApi.Queries;
 using UserApi.Queries.Handlers;
-using UserApi.Queries.Interfaces;
+using UserApi.Interfaces;
 using UserApi.Services;
 using UserApi.Services.Interfaces;
 #pragma warning disable CS1591

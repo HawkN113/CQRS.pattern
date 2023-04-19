@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using UserApi.Models;
 using UserApi.Queries;
-using UserApi.Queries.Interfaces;
+using UserApi.Interfaces;
 using UserApi.Services.Interfaces;
 #pragma warning disable CS1591
 

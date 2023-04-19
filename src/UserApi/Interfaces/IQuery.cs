@@ -1,4 +1,4 @@
-﻿namespace UserApi.Queries.Interfaces;
+﻿namespace UserApi.Interfaces;
 
 /// <summary>
 /// Used to mark query class
