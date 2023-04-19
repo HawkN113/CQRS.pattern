@@ -1,6 +1,8 @@
 ﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using UserApi.Models;
+using UserApi.Queries;
+using UserApi.Queries.Interfaces;
 using UserApi.Services.Interfaces;
 #pragma warning disable CS1591
 
@@ -13,9 +15,16 @@ namespace UserApi.Controllers;
 public class UserController: ControllerBase
 {
     private readonly IUserService _userService;
-    public UserController(IUserService userService)
+    private readonly IQueryHandler<GetUserByIdInfo, UserDto> _getUserByIdInfoHandler;
+    private readonly IQueryHandler<GetUsersListInfo, IEnumerable<UserDto>> _getUsersListInfoHandler;
+    public UserController(
+        IUserService userService, 
+        IQueryHandler<GetUserByIdInfo, UserDto> getUserByIdInfoHandler,
+        IQueryHandler<GetUsersListInfo, IEnumerable<UserDto>> getUsersListInfoHandler)
     {
         _userService = userService;
+        _getUserByIdInfoHandler = getUserByIdInfoHandler;
+        _getUsersListInfoHandler = getUsersListInfoHandler;
     }
 
     /// <summary>
@@ -26,7 +35,8 @@ public class UserController: ControllerBase
     [ProducesResponseType(typeof(IEnumerable<UserDto>), 200)]
     public async Task<IActionResult> GetUsersList()
     {
-        var list = await _userService.GetListAsync();
+        var query = new GetUsersListInfo();
+        var list = await _getUsersListInfoHandler.HandleAsync(query);
         return Ok(list);
     }
     
@@ -39,7 +49,8 @@ public class UserController: ControllerBase
     [ProducesResponseType(typeof(UserDto), 200)]
     public async Task<IActionResult> GetUserById([FromQuery] int id)
     {
-        var result = await _userService.GetByIdAsync(id);
+        var query = new GetUserByIdInfo(id);
+        var result = await _getUserByIdInfoHandler.HandleAsync(query);
         return Ok(result);
     }
 

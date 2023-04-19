@@ -18,20 +18,6 @@ internal class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<UserDto>> GetListAsync()
-    {
-        var list = await _context.Users
-            .ToListAsync();
-        return _mapper.Map<IEnumerable<UserDto>>(list);
-    }
-
-    public async Task<UserDto> GetByIdAsync(int userId)
-    {
-        var user = await _context.Users
-            .FirstOrDefaultAsync(x => x.Id == userId);
-        return _mapper.Map<UserDto>(user);
-    }
-
     public async Task<UserDto> CreateAsync(UserDto entity)
     {
         var user = _mapper.Map<User>(entity);
