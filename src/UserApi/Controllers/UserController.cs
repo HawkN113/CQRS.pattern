@@ -1,9 +1,9 @@
 ﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using UserApi.Commands;
 using UserApi.Models;
 using UserApi.Queries;
 using UserApi.Interfaces;
-using UserApi.Services.Interfaces;
 #pragma warning disable CS1591
 
 namespace UserApi.Controllers;
@@ -14,21 +14,27 @@ namespace UserApi.Controllers;
 [Produces(MediaTypeNames.Application.Json)]
 public class UserController: ControllerBase
 {
-    private readonly IUserService _userService;
     private readonly IQueryHandler<GetUserByIdInfo, UserDto> _getUserByIdInfoHandler;
     private readonly IQueryHandler<GetUsersListInfo, IEnumerable<UserDto>> _getUsersListInfoHandler;
+    private readonly ICommandHandler<CreateUserCommand> _createUserCommandHandler;
+    private readonly ICommandHandler<UpdateUserCommand> _updateUserCommandHandler;
+    private readonly ICommandHandler<DeleteUserCommand> _deleteUserCommandHandler;
     public UserController(
-        IUserService userService, 
         IQueryHandler<GetUserByIdInfo, UserDto> getUserByIdInfoHandler,
-        IQueryHandler<GetUsersListInfo, IEnumerable<UserDto>> getUsersListInfoHandler)
+        IQueryHandler<GetUsersListInfo, IEnumerable<UserDto>> getUsersListInfoHandler,
+        ICommandHandler<CreateUserCommand> createUserCommandHandler,
+        ICommandHandler<UpdateUserCommand> updateUserCommandHandler,
+        ICommandHandler<DeleteUserCommand> deleteUserCommandHandler)
     {
-        _userService = userService;
         _getUserByIdInfoHandler = getUserByIdInfoHandler;
         _getUsersListInfoHandler = getUsersListInfoHandler;
+        _createUserCommandHandler = createUserCommandHandler;
+        _updateUserCommandHandler = updateUserCommandHandler;
+        _deleteUserCommandHandler = deleteUserCommandHandler;
     }
 
     /// <summary>
-    /// Get users from database
+    /// Get users from database (Read operation)
     /// </summary>
     /// <returns></returns>
     [HttpGet("getList")]
@@ -41,7 +47,7 @@ public class UserController: ControllerBase
     }
     
     /// <summary>
-    /// Get user by id
+    /// Get user by id (Read operation)
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -55,7 +61,7 @@ public class UserController: ControllerBase
     }
 
     /// <summary>
-    /// Delete user from database
+    /// Delete user from database (Write operation)
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -63,12 +69,13 @@ public class UserController: ControllerBase
     [ProducesResponseType(typeof(IEnumerable<UserDto>), 200)]
     public async Task<IActionResult> DeleteUser([FromQuery] int id)
     {
-        await _userService.DeleteAsync(id);
+        var command = new DeleteUserCommand(id);
+        await _deleteUserCommandHandler.HandleAsync(command);
         return Ok();
     }
 
     /// <summary>
-    /// Create a new user
+    /// Create a new user (Write operation)
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
@@ -76,12 +83,13 @@ public class UserController: ControllerBase
     [ProducesResponseType(typeof(UserDto), 201)]
     public async Task<IActionResult> CreateUser([FromBody] UserDto user)
     {
-        var result = await _userService.CreateAsync(user);
-        return Created("User has been created", result);
+        var command = new CreateUserCommand(user);
+        await _createUserCommandHandler.HandleAsync(command);
+        return Created("User has been created",null);
     }
 
     /// <summary>
-    /// Updated user data
+    /// Updated user data (Write operation)
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
@@ -89,7 +97,8 @@ public class UserController: ControllerBase
     [ProducesResponseType(typeof(UserDto), 200)]
     public async Task<IActionResult> UpdateUser([FromBody] UserDto user)
     {
-        await _userService.UpdateAsync(user);
+        var command = new UpdateUserCommand(user);
+        await _updateUserCommandHandler.HandleAsync(command);
         return Ok();
     }
 }

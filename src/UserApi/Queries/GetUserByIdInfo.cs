@@ -7,7 +7,7 @@ public class GetUserByIdInfo: IQuery
 {
     public GetUserByIdInfo(int userId)
     {
-        Id = userId;
+        UserId = userId;
     }
-    public int Id { get; }
+    public int UserId { get; }
 }

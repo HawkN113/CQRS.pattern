@@ -2,13 +2,13 @@
 namespace UserApi.Interfaces;
 
 /// <summary>
-/// Used to mark query handler (process query)
+/// Used to mark query handler (process query) (Read operation)
 /// </summary>
 public interface IQueryHandler
 {}
 
 /// <summary>
-/// Generic class to implement query handler
+/// Generic class to implement query handler (Read operation)
 /// </summary>
 /// <typeparam name="T"></typeparam>
 /// <typeparam name="TR"></typeparam>

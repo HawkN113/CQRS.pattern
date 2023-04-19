@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
     .AddDataConfiguration()
-    .AddServicesConfiguration();
+    .AddHandlers();
 
 builder.Services
     .AddControllers()
@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "User API (CQRS)",
+        Title = "User API (CQRS pattern)",
         Description = "Microservice is for handling users."
     });
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

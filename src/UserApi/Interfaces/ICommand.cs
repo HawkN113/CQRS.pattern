@@ -1,7 +1,7 @@
 ﻿namespace UserApi.Interfaces;
 
 /// <summary>
-/// Used to mark query class (Read)
+/// Used to mark command class (Write)
 /// </summary>
-public interface IQuery
+public interface ICommand
 {}

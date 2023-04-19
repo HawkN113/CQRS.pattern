@@ -1,4 +1,5 @@
 ﻿using UserApi.Interfaces;
+#pragma warning disable CS1591
 
 namespace UserApi.Queries;
 

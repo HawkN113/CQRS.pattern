@@ -20,7 +20,7 @@ public sealed class GetUserByIdInfoHandler: IQueryHandler<GetUserByIdInfo, UserD
     public async Task<UserDto> HandleAsync(GetUserByIdInfo query)
     {
         var user = await _dbContext.Users
-            .FirstOrDefaultAsync(x => x.Id == query.Id);
+            .FirstOrDefaultAsync(x => x.Id == query.UserId);
         return _mapper.Map<UserDto>(user);
     }
 }
