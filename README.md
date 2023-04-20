@@ -238,8 +238,8 @@ To test all scenarios, you can run the `Web API` using `Postman` collection:
 ## Live samples
 
 If you are familiar with __GraphQL__, you may know that it implements CQRS by design:
-- Query = Read Model
-- Mutation = Write Model
+- Query = `Query Model`
+- Mutation = `Command Model`
 
 If you ever used __Entity Framework__ or __NHibernate__ for writing data to the database, and raw SQL with plain ADO. NET for reading it back, that was CQRS.
 
