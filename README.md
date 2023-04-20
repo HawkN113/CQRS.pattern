@@ -1,10 +1,12 @@
 ## Overview
 
-__CQRS__ stands for **C**ommand and **Q**uery **R**esponsibility **S**egregation, an architectural pattern for software development. The core idea of this pattern is to separate **Read** and **Update** operations by using different models to handle the treatment. We use **Commands** to update data, and **Queries** to read data.
+**CQRS** stands for `Command and Query Responsibility Segregation`, an architectural pattern for software development. 
+The core idea of this pattern is to separate **Read** and **Update** operations by using different models to handle the treatment. 
+We use **Commands** to update data, and **Queries** to read data.
 
 if you are used to create HTTP web API, here is the translation:
-- Commands = POST/PUT/DELETE methods
-- Queries = GET methods
+- `Commands` = POST/PUT/DELETE methods
+- `Queries` = GET methods
 
 ## Description
 
@@ -13,11 +15,8 @@ The image below illustrates a basic implementation of the CQRS Pattern:
 ![](content/cqrs-pattern.png)
 
 __Command = Instruction__. A command is an instruction, a directive to perform a specific task. It is an intention to change something.
-Handling a command should result in one transaction on one aggregate; basically, each command should clearly state one well-defined change.
-
-Commands represent the intention of changing the state of an entity. They execute operations like Insert, Update, Delete.
-
-The commands are interpreted by the CommandHandlers and they return an event, which can be a successful event or a failure event. If the command succeeds it will create a successful event, and if the command fails it will create a failure event. 
+Commands represent the intention of changing the state of an entity. They execute operations like `Insert`, `Update`, `Delete`.
+The commands are interpreted by the `CommandHandlers` and they return an event, which can be a successful event or a failure event. If the command succeeds it will create a successful event, and if the command fails it will create a failure event. 
 For example:
 ```csharp
 public sealed class CreateUserCommand: ICommand
@@ -34,7 +33,7 @@ public sealed class CreateUserCommand: ICommand
 __Query = Request for info__. A query is a request for information. t is an intention to get data, or the status of data, from a specific place. Nothing in the data should be changed by the request. As queries do not change anything.
 Queries will only contain the methods for getting data. They are used to read the data in the database to return the DTOs to the client, which will be displayed in the user interface.
 
-Queries usually start with the word Get, because queries ask for the application to provide some data, for example:
+Queries usually start with the word `Get`, because queries ask for the application to provide some data, for example:
 ```csharp
 public class GetUserByIdInfo: IQuery
 {
@@ -54,7 +53,7 @@ public class GetUserByIdInfo: IQuery
 - **Clear boundaries between the system behaviour**. Tt provides specific guidance on structuring the application in relation to behaviour.
 - **Closer to business logic**. The code and architecture are segregated by their business operations, making it easier to focus on the business case.
 - **Logging queries and commands**.
-- **Better security**.
+- **Improved security**.
 - **Easier scaling, optimisations and architectural changes**. As our code is kept in silos, it's easier to fine-tune only one pipeline, leaving the rest untouched. It's easier to focus on the precise optimisations in the places that are business-critical.
 
 ## Cons of the pattern
@@ -69,11 +68,12 @@ public class GetUserByIdInfo: IQuery
 - **Integration with other systems, especially in combination with event sourcing**, where the temporal failure of one subsystem shouldn’t affect the availability of the others.
 
 ## When the pattern can not be used?
-- The domain or the business rules are simple.
-- A simple CRUD-style user interface and data access operations are sufficient.
+- **The domain or the business rules are simple**.
+- A **simple CRUD-style user interface** and data access operations are sufficient.
 
 ## Code sample
 In this example, we will create a user api using .NET Core and an In-Memory database. Here is the solution structure:
+
 ![](content/solution-structure.png)
 
 To manage queries operations, I’m using the following interfaces:
