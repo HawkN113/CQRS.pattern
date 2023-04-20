@@ -231,6 +231,9 @@ public async Task<IActionResult> GetUserById([FromQuery] int id)
     return Ok(result);
 }
 ```
+To test all scenarios, you can run the `Web API` using `Postman` collection:
+
+![](content/web-api-view.png)
 
 ## Live samples
 
