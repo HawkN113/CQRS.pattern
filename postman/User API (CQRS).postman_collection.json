@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "1efec289-9bda-4345-b642-069ed910f923",
+		"name": "User API (CQRS)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7102/user/getlist",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"user",
+						"getlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user [2]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7102/user/getbyid?id=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"user",
+						"getbyid"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user [2]",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7102/user/delete?id=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"user",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user [4]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"firstName\": \"Arnold\",\r\n  \"lastName\": \"Wiener\",\r\n  \"email\": \"Arnold.Wiener@example.com\",\r\n  \"phoneNumber\": \"\",\r\n  \"gender\": \"Male\",\r\n  \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7102/user/create",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user [4]",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"firstName\": \"Arnold1\",\r\n  \"lastName\": \"Wiener2\",\r\n  \"email\": \"Arnold.Wiener@example.com\",\r\n  \"phoneNumber\": \"\",\r\n  \"gender\": \"Male\",\r\n  \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7102/user/update",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"user",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
