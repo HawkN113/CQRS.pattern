@@ -45,7 +45,7 @@ public class GetUserByIdInfo: IQuery
 }
 ```
 
-## Pros of the pattern
+## Pros of the pattern 
 - **Separation of Concern**. We have separate models for read and write operations which not only gives us flexibility but also keeps our models simple and easy to maintain. Normally, the write models have most of the complex business logic whereas the read models are normally simple.
 - **Better scalability**. The reads operations often occur way more than writes so keeping queries separate than commands makes our applications highly scalable. Both read and write models can be scaled independently even by two different developers or teams without any fear of breaking anything.
 - **Better performance**. We can use a separate database or a fast cache e.g. Redis for read operations which can improve application performance significantly.
