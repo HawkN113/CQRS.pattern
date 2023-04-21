@@ -67,6 +67,8 @@ public class GetUserByIdInfo: IQuery
 - There is **the need for one team to focus on the complex domain model** that is part of the write model, while another team can focus on the read model and the user interfaces.
 - **Integration with other systems, especially in combination with event sourcing**, where the temporal failure of one subsystem shouldn’t affect the availability of the others.
 
+> Despite these benefits, **you should be very cautious about using CQRS**. Many information systems fit well with the notion of an information base that is updated in the same way that it's read, adding CQRS to such a system can add significant complexity. I've certainly seen cases where it's made a significant drag on productivity, adding an unwarranted amount of risk to the project, even in the hands of a capa
+
 ## When the pattern can not be used?
 - **The domain or the business rules are simple**.
 - A **simple CRUD-style user interface** and data access operations are sufficient.
